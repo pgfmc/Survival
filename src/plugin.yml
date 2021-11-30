@@ -1,0 +1,17 @@
+name: PGF-Survival
+version: 1.0.0
+api-version: 1.17
+authors: [bk, CrimsonDart]
+website: pgfmc.net
+main: net.pgfmc.survival.Main
+description: Survival for PGF
+depend: [PGF-Core, Java_discord_API]
+load: POSTWORLD
+prefix: PGF-Survival
+
+commands:
+  test:
+    description: test command
+    usage: /<command>
+    aliases: [cmd, tst]
+    permission: pgf.cmd.test
