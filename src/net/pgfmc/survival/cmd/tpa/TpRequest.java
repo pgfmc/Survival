@@ -1,0 +1,60 @@
+package net.pgfmc.survival.cmd.tpa;
+
+import org.bukkit.Bukkit;
+import org.bukkit.Sound;
+
+import net.pgfmc.core.requestAPI.Requester;
+import net.pgfmc.survival.Main;
+import net.pgfmc.survival.cmd.Back;
+
+public class TpRequest extends Requester {
+	
+	public static final TpRequest TPA = new TpRequest("Teleport");
+	public static final TpRequest TPAHERE = new TpRequest("Teleport Here");
+	
+	private TpRequest(String name)
+	{
+		super(name, 120, (a, b) -> {
+			if (name.equals("Teleport"))
+			{
+				if (!(a.isOnline() && b.isOnline())) { return false; }
+				
+				a.sendMessage("§6Teleporting to " + b.getRankedName() + " §r§6in 5 seconds");
+				b.sendMessage("§6Teleporting "+ a.getRankedName() +" §r§6here in 5 seconds");
+				
+				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.plugin, new Runnable() { @Override public void run() {
+					a.tempProtect(20 * 2);
+					Back.logBackLocation(a.getPlayer(), a.getPlayer().getLocation());
+					a.teleport(b);
+					a.playSound(Sound.ENTITY_ENDERMAN_TELEPORT);
+					}
+				}, 20 * 5);
+				
+				return true;
+			}
+			
+			
+			if (name.equals("Teleport Here"))
+			{
+				if (!(a.isOnline() && b.isOnline())) { return false; }
+				
+				b.sendMessage("§6Teleporting to " + a.getRankedName() + " §r§ain 5 seconds");
+				a.sendMessage("§6Teleporting "+ b.getRankedName() +" §r§6here in 5 seconds");
+				
+				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.plugin, new Runnable() { @Override public void run() {
+					a.tempProtect(20 * 2);
+					Back.logBackLocation(b.getPlayer(), b.getPlayer().getLocation());
+					b.teleport(a);
+					a.playSound(Sound.ENTITY_ENDERMAN_TELEPORT);
+					}
+				}, 20 * 5);
+				
+				return true;
+			}
+			
+			
+			return false;
+		});
+	}
+
+}
