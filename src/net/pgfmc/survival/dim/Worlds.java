@@ -2,11 +2,13 @@ package net.pgfmc.survival.dim;
 
 import org.bukkit.World;
 /**
- * Enum for the Survival Worlds, containing their respective world data.
- * @author CrimsonDart
+ * Use DimManager.isInWorld(String current, String expected) -- It isn't Survival explicit
  * 
- *
+ * Enum for the Survival Worlds, containing their respective world data.
+ * 
+ * @author CrimsonDart
  */
+@Deprecated
 public enum Worlds {
 	SURVIVAL,
 	SURVIVAL_NETHER,

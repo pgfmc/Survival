@@ -6,8 +6,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import net.pgfmc.core.DimManager;
-
 /**
  * Opens an Ender Chest for the player.
  * @author bk
@@ -21,12 +19,6 @@ public class Echest implements CommandExecutor {
 		if (!(sender instanceof Player)) { return true; }
 		
 		Player p = (Player) sender;
-		
-		if (!DimManager.isSurvivalWorld(p.getWorld()))
-		{
-			p.sendMessage("§cYou can only use this command in the Survival world.");
-			return true;
-		}
 		
 		p.openInventory(p.getEnderChest());
 		p.playSound(p.getLocation(), Sound.BLOCK_ENDER_CHEST_OPEN, 1, 0);

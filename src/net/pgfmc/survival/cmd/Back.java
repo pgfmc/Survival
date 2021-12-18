@@ -13,7 +13,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
-import net.pgfmc.core.DimManager;
 import net.pgfmc.core.playerdataAPI.PlayerData;
 import net.pgfmc.survival.Main;
 import net.pgfmc.survival.dim.SpawnProtection;
@@ -54,12 +53,6 @@ public class Back implements CommandExecutor, Listener {
 		
 		Player p = (Player) sender;
 		
-		if (!DimManager.isSurvivalWorld(p.getWorld()))
-		{
-			p.sendMessage("§cYou can only use this command in the Survival world.");
-			return true;
-		}
-		
 		Location dest = getBackLocation(p);
 		if (dest == null)
 		{
@@ -93,7 +86,6 @@ public class Back implements CommandExecutor, Listener {
 	public void onDeath(PlayerDeathEvent e)
 	{
 		Player p = e.getEntity();
-		if (!DimManager.isSurvivalWorld(p.getWorld())) { return; }
 		
 		logBackLocation(p, p.getLocation());
 	}

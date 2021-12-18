@@ -8,7 +8,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import net.pgfmc.core.DimManager;
 import net.pgfmc.core.playerdataAPI.PlayerData;
 
 public class SetHome implements CommandExecutor {
@@ -22,12 +21,6 @@ public class SetHome implements CommandExecutor {
 			return true;
 		}
 		Player p = (Player) sender;
-		
-		if (!DimManager.isSurvivalWorld(p.getWorld()))
-		{
-			p.sendMessage("§cYou can only use this command in the Survival world.");
-			return true;
-		}
 		
 		if (args.length == 0)
 		{

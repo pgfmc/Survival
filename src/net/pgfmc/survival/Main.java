@@ -19,6 +19,7 @@ import net.pgfmc.survival.dim.Worlds;
 import net.pgfmc.survival.masterbook.FirstJoin;
 import net.pgfmc.survival.masterbook.HelpCommand;
 
+@SuppressWarnings("deprecation")
 public class Main extends JavaPlugin {
 	
 	public static Main plugin;

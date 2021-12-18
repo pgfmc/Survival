@@ -8,7 +8,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import net.pgfmc.core.DimManager;
 import net.pgfmc.core.playerdataAPI.PlayerData;
 
 /**
@@ -29,12 +28,6 @@ public class Afk  implements CommandExecutor {
 		}
 		
 		Player p = (Player) sender;
-		
-		if (!DimManager.isSurvivalWorld(p.getWorld()))
-		{
-			p.sendMessage("§cYou can only use this command in the Survival world.");
-			return true;
-		}
 		
 		// adds or removes players depending on if they are Afk or not.
 		

@@ -7,7 +7,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import net.pgfmc.core.DimManager;
 import net.pgfmc.core.playerdataAPI.PlayerData;
  /**
   * Provides the Effects of AFK mode.
@@ -26,7 +25,6 @@ public class AfkEvents implements Listener {
 	
 	@EventHandler
 	public void preventMove(PlayerMoveEvent e) {
-		if (!DimManager.isSurvivalWorld(e.getPlayer().getWorld())) { return; }
 		
 		if (Afk.isAfk(e.getPlayer())) {
 			e.setTo(e.getFrom().setDirection(e.getTo().getDirection())); // Let the player move their camera, but not the player
@@ -36,7 +34,6 @@ public class AfkEvents implements Listener {
 	
 	@EventHandler
 	public void click(PlayerInteractEvent e) {
-		if (!DimManager.isSurvivalWorld(e.getPlayer().getWorld())) { return; }
 		
 		if (Afk.isAfk(e.getPlayer())) {
 			PlayerData.setData(e.getPlayer(), "AFK", false);
