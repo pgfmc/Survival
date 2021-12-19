@@ -6,6 +6,7 @@ import org.bukkit.Sound;
 import net.pgfmc.core.requestAPI.Requester;
 import net.pgfmc.survival.Main;
 import net.pgfmc.survival.cmd.Back;
+import net.pgfmc.survival.dim.SpawnProtection;
 
 public class TpRequest extends Requester {
 	
@@ -23,7 +24,7 @@ public class TpRequest extends Requester {
 				b.sendMessage("§6Teleporting "+ a.getRankedName() +" §r§6here in 5 seconds");
 				
 				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.plugin, new Runnable() { @Override public void run() {
-					a.tempProtect(20 * 2);
+					SpawnProtection.TEMP_PROTECT(a.getPlayer(), 40);
 					Back.logBackLocation(a.getPlayer(), a.getPlayer().getLocation());
 					a.teleport(b);
 					a.playSound(Sound.ENTITY_ENDERMAN_TELEPORT);
@@ -33,7 +34,6 @@ public class TpRequest extends Requester {
 				return true;
 			}
 			
-			
 			if (name.equals("Teleport Here"))
 			{
 				if (!(a.isOnline() && b.isOnline())) { return false; }
@@ -42,7 +42,10 @@ public class TpRequest extends Requester {
 				a.sendMessage("§6Teleporting "+ b.getRankedName() +" §r§6here in 5 seconds");
 				
 				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.plugin, new Runnable() { @Override public void run() {
-					a.tempProtect(20 * 2);
+					
+					SpawnProtection.TEMP_PROTECT(a.getPlayer(), 40);
+					
+					//a.	tempProtect(20 * 2);
 					Back.logBackLocation(b.getPlayer(), b.getPlayer().getLocation());
 					b.teleport(a);
 					a.playSound(Sound.ENTITY_ENDERMAN_TELEPORT);
