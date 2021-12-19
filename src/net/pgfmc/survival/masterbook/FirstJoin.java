@@ -9,8 +9,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import net.pgfmc.core.permissions.Permissions;
-import net.pgfmc.core.permissions.Roles;
 import net.pgfmc.core.playerdataAPI.PlayerData;
 
 /**
@@ -35,11 +33,6 @@ public class FirstJoin implements Listener {
 		if (pd == null) {
 			
 			pd = new PlayerData(e.getPlayer());
-			
-			
-			pd.setData("AFK", false);
-			Roles.recalculateRoles(pd);
-			Permissions.recalcPerms(pd);
 			
 			if (helpBook == null) {
 				helpBook = new ItemStack(Material.BOOK);

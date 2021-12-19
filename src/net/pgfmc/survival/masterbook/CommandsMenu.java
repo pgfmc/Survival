@@ -13,7 +13,7 @@ import net.pgfmc.core.DimManager;
 import net.pgfmc.core.cmd.Blocked;
 import net.pgfmc.core.inventoryAPI.InteractableInventory;
 import net.pgfmc.core.inventoryAPI.PagedInventory;
-import net.pgfmc.core.permissions.Roles.Role;
+import net.pgfmc.core.permissions.Role;
 import net.pgfmc.core.playerdataAPI.PlayerData;
 import net.pgfmc.core.requestAPI.Request;
 import net.pgfmc.core.requestAPI.Requester;
