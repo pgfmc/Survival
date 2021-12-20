@@ -34,7 +34,7 @@ public class Afk  implements CommandExecutor {
 		if ((boolean) PlayerData.getData(p, "AFK")) {
 			p.sendMessage("§cAFK mode off.");
 			// If the player was in god mode when entering afk, keep in god mode
-			if (!(boolean) Optional.ofNullable(PlayerData.getData(p, "god")).orElse(false))
+			if (!(boolean) Optional.ofNullable(PlayerData.getData(p, "god")).orElse(false)); // XXX what the heck this only happens with god mode
 			{
 				p.setInvulnerable(false);
 			}
