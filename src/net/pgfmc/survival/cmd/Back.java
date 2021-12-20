@@ -1,10 +1,7 @@
 package net.pgfmc.survival.cmd;
 
-import java.util.Optional;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -13,7 +10,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 
-import net.pgfmc.core.playerdataAPI.PlayerData;
+import net.pgfmc.core.cmd.Goto;
 import net.pgfmc.survival.Main;
 import net.pgfmc.survival.dim.SpawnProtection;
 
@@ -22,26 +19,6 @@ import net.pgfmc.survival.dim.SpawnProtection;
  * @author bk
  */
 public class Back implements CommandExecutor, Listener {
-	
-	/**
-	 * saves a player's last location.
-	 * @param p Player
-	 * @param loc The Player's last Location
-	 */
-	public static void logBackLocation(OfflinePlayer p, Location loc)
-	{
-		PlayerData.setData(p, "backLoc", loc);
-	}
-	
-	/**
-	 * Gets a player's last Location
-	 * @param p Player
-	 * @return A player's last Location, null if none
-	 */
-	public Location getBackLocation(OfflinePlayer p)
-	{
-		return Optional.ofNullable((Location) PlayerData.getData(p, "backLoc")).orElse(null);
-	}
 	
 	/**
 	 * Teleports a player their back location if it exists
@@ -53,7 +30,7 @@ public class Back implements CommandExecutor, Listener {
 		
 		Player p = (Player) sender;
 		
-		Location dest = getBackLocation(p);
+		Location dest = Goto.getBackLocation(p);
 		if (dest == null)
 		{
 			p.sendMessage("§cYou do not have a back location.");
@@ -67,7 +44,7 @@ public class Back implements CommandExecutor, Listener {
 			@Override
 			public void run()
 			{
-				logBackLocation(p, null);
+				Goto.logBackLocation(p, null);
 				SpawnProtection.TEMP_PROTECT(p, 20 * 2);
 				p.teleport(dest); // may be wrong I will test
 				p.sendMessage("§aPoof!");
@@ -87,7 +64,7 @@ public class Back implements CommandExecutor, Listener {
 	{
 		Player p = e.getEntity();
 		
-		logBackLocation(p, p.getLocation());
+		Goto.logBackLocation(p, p.getLocation());
 	}
 
 }

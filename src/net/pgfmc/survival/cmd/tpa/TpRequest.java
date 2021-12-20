@@ -3,9 +3,9 @@ package net.pgfmc.survival.cmd.tpa;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 
+import net.pgfmc.core.cmd.Goto;
 import net.pgfmc.core.requestAPI.Requester;
 import net.pgfmc.survival.Main;
-import net.pgfmc.survival.cmd.Back;
 import net.pgfmc.survival.dim.SpawnProtection;
 
 public class TpRequest extends Requester {
@@ -25,7 +25,7 @@ public class TpRequest extends Requester {
 				
 				Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.plugin, new Runnable() { @Override public void run() {
 					SpawnProtection.TEMP_PROTECT(a.getPlayer(), 40);
-					Back.logBackLocation(a.getPlayer(), a.getPlayer().getLocation());
+					Goto.logBackLocation(a.getPlayer(), a.getPlayer().getLocation());
 					a.teleport(b);
 					a.playSound(Sound.ENTITY_ENDERMAN_TELEPORT);
 					}
@@ -46,7 +46,7 @@ public class TpRequest extends Requester {
 					SpawnProtection.TEMP_PROTECT(a.getPlayer(), 40);
 					
 					//a.	tempProtect(20 * 2);
-					Back.logBackLocation(b.getPlayer(), b.getPlayer().getLocation());
+					Goto.logBackLocation(b.getPlayer(), b.getPlayer().getLocation());
 					b.teleport(a);
 					a.playSound(Sound.ENTITY_ENDERMAN_TELEPORT);
 					}

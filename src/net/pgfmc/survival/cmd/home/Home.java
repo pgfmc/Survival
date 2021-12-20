@@ -10,8 +10,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import net.pgfmc.core.cmd.Goto;
 import net.pgfmc.survival.Main;
-import net.pgfmc.survival.cmd.Back;
 import net.pgfmc.survival.dim.SpawnProtection;
 
 public class Home implements CommandExecutor {
@@ -41,7 +41,7 @@ public class Home implements CommandExecutor {
 			
 			Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Main.plugin, new Runnable() { @Override public void run() {
 				SpawnProtection.TEMP_PROTECT(p, 20 * 2); // Spawn protection
-				Back.logBackLocation(p, p.getLocation()); // Log back location
+				Goto.logBackLocation(p, p.getLocation()); // Log back location
 				p.teleport(toHome);
 				p.playSound(p.getLocation(), Sound.ENTITY_ENDERMAN_TELEPORT, 1, 0);
 				}
