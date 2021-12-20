@@ -8,5 +8,6 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="E:/github/javaLib/spigot-api-1.18.1-R0.1-SNAPSHOT.jar"/>
 	<classpathentry kind="lib" path="E:/github/javaLib/PGF-Core.jar"/>
+	<classpathentry kind="lib" path="E:/github/javalib/Team.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
