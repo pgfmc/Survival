@@ -39,6 +39,7 @@ public class AfkEvents implements Listener {
 			PlayerData.setData(e.getPlayer(), "AFK", false);
 			e.getPlayer().setInvulnerable(false);
 			e.getPlayer().resetTitle();
+			e.getPlayer().sendMessage("§cAFK mode off.");
 		}
 	}
 	
