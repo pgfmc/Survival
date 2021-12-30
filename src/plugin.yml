@@ -19,3 +19,8 @@ commands:
     description: Signals that a player is inactive
     usage: /<command>
     permission: pgf.cmd.afk
+  craft:
+    description: Open the crafting inventory!
+    usage: /<command>
+    aliases: [bench]
+    permission: pgf.cmd.donator.craft

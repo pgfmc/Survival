@@ -3,6 +3,7 @@ package net.pgfmc.survival;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import net.pgfmc.survival.cmd.Afk;
+import net.pgfmc.survival.cmd.donator.Craft;
 import net.pgfmc.survival.cmd.donator.Echest;
 
 public class Main extends JavaPlugin {
@@ -16,6 +17,7 @@ public class Main extends JavaPlugin {
 		
 		getCommand("afk").setExecutor(new Afk());
 		getCommand("echest").setExecutor(new Echest());
+		getCommand("craft").setExecutor(new Craft());
 		
 		
 		getServer().getPluginManager().registerEvents(new Afk(), this);
