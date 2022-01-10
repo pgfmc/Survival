@@ -2,6 +2,7 @@ package net.pgfmc.survival.cmd;
 
 import java.util.Optional;
 
+import org.bukkit.GameMode;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -10,8 +11,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
 
 import net.pgfmc.core.playerdataAPI.PlayerData;
 
@@ -43,20 +44,20 @@ public class Afk  implements CommandExecutor, Listener {
 		Player p = e.getPlayer();
 		if (Afk.isAfk(p))
 		{
-			// Moving in the Y axis toggles AFK
-			if (e.getTo().getY() != e.getFrom().getY())
+			// Jumping toggles AFK
+			if (e.getTo().getY() > e.getFrom().getY())
 			{
+				System.out.println("Jumped!");
 				toggleAfk(p);
 				return;
 			}
 			
-			// This lets them look, but not move
-			e.setTo( // Set their "to" location to their "from" location
-					e.getFrom()
-					.setDirection( // Set their "to" direction to their "to" direction
-							e.getTo().getDirection()));
-			return;
+			
+			e.setTo( // No move
+					e.getFrom().setDirection(e.getTo().getDirection()) // Let move camera
+					);
 		}
+		
 	}
 	
 	@EventHandler
@@ -64,23 +65,40 @@ public class Afk  implements CommandExecutor, Listener {
 	{
 		if (Afk.isAfk(e.getPlayer()))
 		{
+			System.out.println("Clicked!");
 			toggleAfk(e.getPlayer());
 			return;
 		}
 	}
 	
 	@EventHandler
-	public void onQuit(PlayerQuitEvent e) // disables AFK when a player leaves the server.
+	public void onJoin(PlayerJoinEvent e) // disables AFK when a player joins the server.
 	{
 		Player p = e.getPlayer();
 		
-		if (isAfk(p))
+		if (p.isInvulnerable() && p.getGameMode() == GameMode.SURVIVAL)
 		{
-			toggleAfk(p);
+			p.setInvulnerable(false);
+			PlayerData.setData(p, "AFK", false);
 		}
 	}
 	
-	
+	/*
+	@EventHandler
+	public void onTeleport(PlayerTeleportEvent e)
+	{
+		Player p = e.getPlayer();
+		if (Afk.isAfk(p) && e.getCause() != TeleportCause.UNKNOWN)
+		{
+			// Moved, more like a safeguard
+			if (!e.getFrom().equals(e.getTo()))
+			{
+				toggleAfk(p);
+				System.out.println("Teleported! Cause: " + e.getCause());
+			}
+		}
+	}
+	*/
 	
 	
 	@SuppressWarnings("deprecation")
